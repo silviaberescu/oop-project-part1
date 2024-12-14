@@ -3,6 +3,8 @@ package org.poo.main;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import org.poo.Bank.Bank;
+import org.poo.Bank.BankUtils;
 import org.poo.checker.Checker;
 import org.poo.checker.CheckerConstants;
 import org.poo.fileio.ObjectInput;
@@ -15,6 +17,8 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Objects;
+
+import static org.poo.utils.Utils.resetRandom;
 
 /**
  * The entry point to this homework. It runs the checker that tests your implementation.
@@ -92,6 +96,10 @@ public final class Main {
          * output.add(objectNode);
          *
          */
+
+        resetRandom();
+        Bank bank = new Bank(inputData, output);
+        BankUtils.transactionFlow(inputData.getCommands(), output, bank.getUsers(), bank.getExchanges());
 
         ObjectWriter objectWriter = objectMapper.writerWithDefaultPrettyPrinter();
         objectWriter.writeValue(new File(filePath2), output);
