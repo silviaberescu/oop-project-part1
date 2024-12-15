@@ -1,25 +1,32 @@
-package org.poo.User;
+package org.poo.Transactions;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.poo.Account.Account;
-import org.poo.Transactions.Transaction;
 
 import java.util.ArrayList;
 
-public class SplitPayementTransaction extends Transaction {
-    private String currency;
-    private double amount;
-    private ArrayList<Account> accounts;
-    public SplitPayementTransaction(int timestamp, String description, String associatedIban, String currency,
-                                    double amount, ArrayList<Account> accounts) {
+public class SplitPaymentTransaction extends Transaction {
+    private final String currency;
+    private final double amount;
+    private final ArrayList<Account> accounts;
+    public SplitPaymentTransaction(final int timestamp, final String description,
+                                   final String associatedIban, final String currency,
+                                   final double amount, final ArrayList<Account> accounts) {
         super(timestamp, description, associatedIban);
         this.amount = amount;
         this.currency = currency;
         this.accounts = accounts;
     }
-
+    /**
+     * Converts the transaction details into a JSON representation.
+     * @return an ObjectNode representing the transaction in JSON format.
+     * The JSON structure includes:
+     * {@code currency}: the currency of the transaction
+     * {@code amount}: the total amount of the transaction
+     * {@code involvedAccounts}: an array of IBANs for the accounts involved in the transaction
+     */
     @Override
     public ObjectNode toJsonNode() {
         ObjectNode node = super.toJsonNode();

@@ -1,17 +1,18 @@
-package org.poo.User;
+package org.poo.Transactions;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.poo.Transactions.Transaction;
 
-public class TransferTransaction extends Transaction {
+public final class TransferTransaction extends Transaction {
     private final String senderIBAN;
     private final String receiverIBAN;
     private double amount;
     private boolean sent;
-    private String currency;
+    private final String currency;
 
-    public TransferTransaction(int timestamp, String description, String associatedIban, String senderIBAN, boolean sent, double amount,
-                               String receiverIBAN, String currency) {
+    public TransferTransaction(final int timestamp, final String description,
+                               final String associatedIban, final String senderIBAN,
+                               final boolean sent, final double amount,
+                               final String receiverIBAN, final String currency) {
         super(timestamp, description, associatedIban);
         this.senderIBAN = senderIBAN;
         this.sent = sent;
@@ -20,6 +21,13 @@ public class TransferTransaction extends Transaction {
         this.currency = currency;
     }
 
+    /**
+     * Converts this transaction to a JSON representation.
+     *
+     * @return an ObjectNode containing the transaction details,
+     *         including sender and receiver IBANs, amount, currency,
+     *         and transfer type (sent or received).
+     */
     @Override
     public ObjectNode toJsonNode() {
         ObjectNode node = super.toJsonNode();
@@ -38,7 +46,7 @@ public class TransferTransaction extends Transaction {
         return sent;
     }
 
-    public void setSent(boolean sent) {
+    public void setSent(final boolean sent) {
         this.sent = sent;
     }
 
@@ -46,7 +54,7 @@ public class TransferTransaction extends Transaction {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(final int amount) {
         this.amount = amount;
     }
 

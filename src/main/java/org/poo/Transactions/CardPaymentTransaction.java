@@ -1,19 +1,26 @@
-package org.poo.User;
+package org.poo.Transactions;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.poo.Transactions.Transaction;
 
-public class CardPaymentTransaction extends Transaction {
+public final class CardPaymentTransaction extends Transaction {
     private String commerciant;
     private double amount;
-    private String associatedIban;
-    public CardPaymentTransaction(String associatedIban, int timestamp, String description, double amount, String commerciant) {
+    private final String associatedIban;
+    public CardPaymentTransaction(final String associatedIban, final int timestamp,
+                                  final String description, final double amount,
+                                  final String commerciant) {
         super(timestamp, description, associatedIban);
         this.commerciant = commerciant;
         this.amount = amount;
         this.associatedIban = associatedIban;
     }
 
+    /**
+     * Converts this card payment transaction to a JSON representation.
+     *
+     * @return an ObjectNode containing the transaction details,
+     *         including the amount and the commerciant.
+     */
     @Override
     public ObjectNode toJsonNode() {
         ObjectNode node = super.toJsonNode();
@@ -26,7 +33,7 @@ public class CardPaymentTransaction extends Transaction {
         return commerciant;
     }
 
-    public void setCommerciant(String commerciant) {
+    public void setCommerciant(final String commerciant) {
         this.commerciant = commerciant;
     }
 
@@ -34,7 +41,7 @@ public class CardPaymentTransaction extends Transaction {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(final double amount) {
         this.amount = amount;
     }
 
