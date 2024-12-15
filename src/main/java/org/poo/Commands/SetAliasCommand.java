@@ -4,13 +4,14 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import org.poo.Account.Account;
 import org.poo.User.User;
 
-public class SetAliasCommand implements Command {
+public final class SetAliasCommand implements Command {
     private String alias;
     private User user;
     private Account account;
     private int timestamp;
 
-    public SetAliasCommand(User user, Account account, String alias, int timestamp) {
+    public SetAliasCommand(final User user, final Account account,
+                           final String alias, final int timestamp) {
         this.alias = alias;
         this.timestamp = timestamp;
         this.account = account;
@@ -21,7 +22,7 @@ public class SetAliasCommand implements Command {
         return alias;
     }
 
-    public void setAlias(String alias) {
+    public void setAlias(final String alias) {
         this.alias = alias;
     }
 
@@ -29,7 +30,7 @@ public class SetAliasCommand implements Command {
         return timestamp;
     }
 
-    public void setTimestamp(int timestamp) {
+    public void setTimestamp(final int timestamp) {
         this.timestamp = timestamp;
     }
 
@@ -37,7 +38,7 @@ public class SetAliasCommand implements Command {
         return account;
     }
 
-    public void setAccount(Account account) {
+    public void setAccount(final Account account) {
         this.account = account;
     }
 
@@ -45,12 +46,12 @@ public class SetAliasCommand implements Command {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(final User user) {
         this.user = user;
     }
 
     @Override
-    public void execute(ArrayNode output) {
-        CommandUtils.setAlias(user, account, alias, timestamp);
+    public void execute(final ArrayNode output) {
+        CommandUtils.setAlias(user, account, alias);
     }
 }

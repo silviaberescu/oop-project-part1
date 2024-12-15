@@ -4,13 +4,15 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import org.poo.Card.Card;
 import org.poo.User.User;
 
-public class CheckCardStatusCommand implements Command {
-    private Card card;
-    private double balance;
-    private double minBalance;
-    private int timestamp;
-    private User user;
-    public CheckCardStatusCommand(User user, Card card, double balance, double minBalance, int timestamp) {
+public final class CheckCardStatusCommand implements Command {
+    private final Card card;
+    private final double balance;
+    private final double minBalance;
+    private final int timestamp;
+    private final User user;
+    public CheckCardStatusCommand(final User user, final Card card,
+                                  final double balance, final double minBalance,
+                                  final int timestamp) {
         this.card = card;
         this.balance = balance;
         this.minBalance = minBalance;
@@ -19,7 +21,8 @@ public class CheckCardStatusCommand implements Command {
     }
 
     @Override
-    public void execute(ArrayNode output) {
-        CommandUtils.checkCardStatus(user, card, balance, minBalance, timestamp, output);
+    public void execute(final ArrayNode output) {
+        CommandUtils.checkCardStatus(user, card, balance, minBalance,
+                timestamp, output);
     }
 }

@@ -8,19 +8,21 @@ import org.poo.User.User;
 
 import java.util.ArrayList;
 
-public class PayOnlineCommand implements Command{
-    private String cardNumber;
-    private double amount;
-    private String currency;
-    private String description;
-    private String commerciant;
-    private int timestamp;
-    private User user;
-    ArrayList<ExchangeRate> exchanges;
+public final class PayOnlineCommand implements Command {
+    private final String cardNumber;
+    private final double amount;
+    private final String currency;
+    private final String description;
+    private final String commerciant;
+    private final int timestamp;
+    private final User user;
+    private final ArrayList<ExchangeRate> exchanges;
 
-    public PayOnlineCommand(User user, String cardNumber, double amount, String description,
-                            String commerciant, String currency, int timestamp,
-                            ArrayList<ExchangeRate> exchanges) {
+    public PayOnlineCommand(final User user, final String cardNumber,
+                            final double amount, final String description,
+                            final String commerciant, final String currency,
+                            final int timestamp,
+                            final ArrayList<ExchangeRate> exchanges) {
         this.user = user;
         this.timestamp = timestamp;
         this.commerciant = commerciant;
@@ -31,21 +33,25 @@ public class PayOnlineCommand implements Command{
         this.exchanges = exchanges;
     }
 
+
     @Override
-    public void execute(ArrayNode output) {
+    public void execute(final ArrayNode output) {
         boolean found = false;
-        for(Account accountCurrent: user.getAccounts()){
-            for(Card cardCurrent: accountCurrent.getCards()){
-                if(cardCurrent.getCardNumber().equals(cardNumber)){
-                    CommandUtils.payOnline(user, accountCurrent, cardCurrent, amount, description, commerciant,
-                            currency, exchanges, timestamp, output);
+        for (Account accountCurrent: user.getAccounts()) {
+            for (Card cardCurrent: accountCurrent.getCards()) {
+                if (cardCurrent.getCardNumber().equals(cardNumber)) {
+                    CommandUtils.payOnline(user, accountCurrent, cardCurrent,
+                            amount, commerciant, currency, exchanges, timestamp,
+                            output, description);
                     found = true;
                     break;
                 }
             }
         }
-        if(!found)
-            CommandUtils.payOnline(user, null, null, amount, description, commerciant,
-                currency, exchanges, timestamp, output);
+        if (!found) {
+            CommandUtils.payOnline(user, null, null, amount,
+                    commerciant, currency, exchanges, timestamp, output,
+                    description);
+        }
     }
 }

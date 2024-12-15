@@ -1,16 +1,16 @@
 package org.poo.Commands;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.JsonNodeFactory;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.poo.Account.Account;
-import org.poo.Card.Card;
-import org.poo.User.User;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public interface Command {
+    /**
+     * Executes the command and populates the provided ArrayNode with the result.
+     *
+     * This method performs the command's logic and adds the outcome to the provided
+     * ArrayNode in JSON format.
+     *
+     * @param output the ArrayNode to be populated with the command's result
+     */
     void execute(ArrayNode output);
 }
 

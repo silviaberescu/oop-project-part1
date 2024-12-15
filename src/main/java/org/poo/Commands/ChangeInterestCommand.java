@@ -4,21 +4,23 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import org.poo.Account.Account;
 import org.poo.User.User;
 
-public class ChangeInterestCommand implements Command {
-    private Account account;
-    private User user;
-    private int timestamp;
-    private double interstRate;
+public final class ChangeInterestCommand implements Command {
+    private final Account account;
+    private final User user;
+    private final int timestamp;
+    private final double interestRate;
 
-    public ChangeInterestCommand(User user, Account account, double interestRate, int timestamp) {
+    public ChangeInterestCommand(final User user, final Account account,
+                                 final double interestRate,
+                                 final int timestamp) {
         this.account = account;
         this.timestamp = timestamp;
         this.user = user;
-        this.interstRate = interestRate;
+        this.interestRate = interestRate;
     }
 
     @Override
-    public void execute(ArrayNode output) {
-        CommandUtils.changeInterest(user, account, interstRate, timestamp, output);
+    public void execute(final ArrayNode output) {
+        CommandUtils.changeInterest(user, account, interestRate, timestamp, output);
     }
 }

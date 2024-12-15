@@ -5,13 +5,14 @@ import org.poo.Account.Account;
 import org.poo.Card.Card;
 import org.poo.User.User;
 
-public class DeleteCardCommand implements Command{
-    private Account account;
-    private Card card;
-    private int timestamp;
-    private User user;
+public final class DeleteCardCommand implements Command {
+    private final Account account;
+    private final Card card;
+    private final int timestamp;
+    private final User user;
 
-    public DeleteCardCommand(User user, Account account, Card card, int timestamp) {
+    public DeleteCardCommand(final User user, final Account account,
+                             final Card card, final int timestamp) {
         this.account = account;
         this.card = card;
         this.timestamp = timestamp;
@@ -19,7 +20,7 @@ public class DeleteCardCommand implements Command{
     }
 
     @Override
-    public void execute(ArrayNode output) {
-        CommandUtils.deleteCard(user, account, card, timestamp, output);
+    public void execute(final ArrayNode output) {
+        CommandUtils.deleteCard(user, account, card, timestamp);
     }
 }

@@ -5,17 +5,17 @@ import org.poo.User.User;
 
 import java.util.ArrayList;
 
-public class PrintUsersCommand implements Command {
-    private ArrayList<User> users;
-    private int timestamp;
+public final class PrintUsersCommand implements Command {
+    private final ArrayList<User> users;
+    private final int timestamp;
 
-    public PrintUsersCommand(ArrayList<User> users, int timestamp) {
+    public PrintUsersCommand(final ArrayList<User> users, final int timestamp) {
         this.users = users;
         this.timestamp = timestamp;
     }
 
     @Override
-    public void execute(ArrayNode output) {
+    public void execute(final ArrayNode output) {
         CommandUtils.printUsers(users, timestamp, output);
     }
 }

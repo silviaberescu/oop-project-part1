@@ -7,18 +7,21 @@ import org.poo.User.User;
 
 import java.util.ArrayList;
 
-public class SendMoneyCommand implements Command {
-    private User senderUser;
-    private User receiverUser;
-    private Account sender;
-    private Account receiver;
-    private double amount;
-    private int timestamp;
-    private String description;
-    private ArrayList<ExchangeRate> exchanges;
+public final class SendMoneyCommand implements Command {
+    private final User senderUser;
+    private final User receiverUser;
+    private final Account sender;
+    private final Account receiver;
+    private final double amount;
+    private final int timestamp;
+    private final String description;
+    private final ArrayList<ExchangeRate> exchanges;
 
-    public SendMoneyCommand(User senderUser, User receiverUser, Account sender, Account receiver, double amount,
-                            String description, ArrayList<ExchangeRate> exchanges, int timestamp) {
+    public SendMoneyCommand(final User senderUser, final User receiverUser,
+                            final Account sender, final Account receiver,
+                            final double amount, final String description,
+                            final ArrayList<ExchangeRate> exchanges,
+                            final int timestamp) {
         this.exchanges = exchanges;
         this.description = description;
         this.timestamp = timestamp;
@@ -30,7 +33,8 @@ public class SendMoneyCommand implements Command {
     }
 
     @Override
-    public void execute(ArrayNode output) {
-        CommandUtils.sendMoney(senderUser, receiverUser, sender, receiver, amount, description, exchanges, timestamp, output);
+    public void execute(final ArrayNode output) {
+        CommandUtils.sendMoney(senderUser, receiverUser, sender,
+                receiver, amount, description, exchanges, timestamp);
     }
 }

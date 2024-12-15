@@ -3,11 +3,11 @@ package org.poo.Commands;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import org.poo.User.User;
 
-public class PrintTransactionsCommand implements Command{
+public final class PrintTransactionsCommand implements Command {
     private int timestamp;
     private User user;
 
-    public PrintTransactionsCommand(int timestamp, User user) {
+    public PrintTransactionsCommand(final int timestamp, final User user) {
         this.timestamp = timestamp;
         this.user = user;
     }
@@ -17,7 +17,7 @@ public class PrintTransactionsCommand implements Command{
         return timestamp;
     }
 
-    public void setTimestamp(int timestamp) {
+    public void setTimestamp(final int timestamp) {
         this.timestamp = timestamp;
     }
 
@@ -25,12 +25,12 @@ public class PrintTransactionsCommand implements Command{
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(final User user) {
         this.user = user;
     }
 
     @Override
-    public void execute(ArrayNode output) {
+    public void execute(final ArrayNode output) {
         CommandUtils.printTransactions(user, timestamp, output);
     }
 }

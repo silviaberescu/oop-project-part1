@@ -4,14 +4,16 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import org.poo.Account.Account;
 import org.poo.User.User;
 
-public class ReportCommand implements Command {
-    private Account account;
-    private User user;
-    private int startTimestamp;
-    private int endTimestamp;
-    private int timestamp;
+public final class ReportCommand implements Command {
+    private final Account account;
+    private final User user;
+    private final int startTimestamp;
+    private final int endTimestamp;
+    private final int timestamp;
 
-    public ReportCommand(User user, Account account, int startTimestamp, int endTimestamp, int timestamp) {
+    public ReportCommand(final User user, final Account account,
+                         final int startTimestamp, final int endTimestamp,
+                         final int timestamp) {
         this.account = account;
         this.timestamp = timestamp;
         this.endTimestamp = endTimestamp;
@@ -20,7 +22,7 @@ public class ReportCommand implements Command {
     }
 
     @Override
-    public void execute(ArrayNode output) {
+    public void execute(final ArrayNode output) {
         CommandUtils.report(user, account, startTimestamp, endTimestamp, timestamp, output);
     }
 }

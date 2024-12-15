@@ -1,6 +1,7 @@
 package org.poo.User;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.poo.Transactions.Transaction;
 
 public class NewCardTransaction extends Transaction {
     private String cardNumber;

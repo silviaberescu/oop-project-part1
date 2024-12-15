@@ -4,18 +4,20 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import org.poo.Account.Account;
 import org.poo.User.User;
 
-public class CreateOneTimeCardCommand implements Command{
-    private Account account;
-    private User user;
-    private int timestamp;
-    public CreateOneTimeCardCommand(User user, Account account, int timestamp) {
+public final class CreateOneTimeCardCommand implements Command {
+    private final Account account;
+    private final User user;
+    private final int timestamp;
+    public CreateOneTimeCardCommand(final User user,
+                                    final Account account,
+                                    final int timestamp) {
         this.user = user;
         this.account = account;
         this.timestamp = timestamp;
 
     }
     @Override
-    public void execute(ArrayNode output) {
+    public void execute(final ArrayNode output) {
         CommandUtils.createOneTimeCard(user, account, timestamp);
     }
 }

@@ -1,8 +1,9 @@
 package org.poo.User;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.poo.Transactions.Transaction;
 
-public class CardPaymentTransaction extends Transaction{
+public class CardPaymentTransaction extends Transaction {
     private String commerciant;
     private double amount;
     private String associatedIban;

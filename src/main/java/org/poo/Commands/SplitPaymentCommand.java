@@ -7,26 +7,27 @@ import org.poo.User.User;
 
 import java.util.ArrayList;
 
-public class SplitPaymentCommand implements Command {
-    private ArrayList<User> users;
-    private ArrayList<Account> accounts;
-    private double amount;
-    private String currency;
-    private int timestamp;
-    private ArrayList<ExchangeRate> exchanges;
+public final class SplitPaymentCommand implements Command {
+    private final ArrayList<User> users;
+    private final ArrayList<Account> accounts;
+    private final double amount;
+    private final String currency;
+    private final int timestamp;
+    private final ArrayList<ExchangeRate> exchanges;
 
-    public SplitPaymentCommand(ArrayList<User> users, ArrayList<Account> accounts, double amount,
-                               String currency, int timestamp, ArrayList<ExchangeRate> exchanges) {
+    public SplitPaymentCommand(final ArrayList<User> users, final ArrayList<Account> accounts,
+                               final double amount, final String currency,
+                               final int timestamp, final ArrayList<ExchangeRate> exchanges) {
         this.users = users;
         this.currency = currency;
         this.amount = amount;
         this.accounts = accounts;
-        this.timestamp= timestamp;
+        this.timestamp = timestamp;
         this.exchanges = exchanges;
     }
 
     @Override
-    public void execute(ArrayNode output) {
+    public void execute(final ArrayNode output) {
         CommandUtils.splitPayment(users, accounts, amount, currency, timestamp, exchanges);
     }
 }
