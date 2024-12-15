@@ -99,7 +99,8 @@ public final class Main {
 
         resetRandom();
         Bank bank = new Bank(inputData, output);
-        BankUtils.transactionFlow(inputData.getCommands(), output, bank.getUsers(), bank.getExchanges());
+        BankUtils.transactionFlow(inputData.getCommands(), output, bank.getUsers(),
+                bank.getExchanges());
 
         ObjectWriter objectWriter = objectMapper.writerWithDefaultPrettyPrinter();
         objectWriter.writeValue(new File(filePath2), output);

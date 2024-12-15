@@ -1,9 +1,10 @@
 package org.poo.Account;
 
-public class SavingsAccount extends Account {
+public final class SavingsAccount extends Account {
     private double interestRate;
 
-    public SavingsAccount(String currency, double interestRate) {
+    public SavingsAccount(final String currency,
+                          final double interestRate) {
         super(currency);
         this.interestRate = interestRate;
     }
@@ -17,7 +18,7 @@ public class SavingsAccount extends Account {
         return interestRate;
     }
 
-    public void setInterestRate(double interestRate) {
+    public void setInterestRate(final double interestRate) {
         this.interestRate = interestRate;
     }
 }

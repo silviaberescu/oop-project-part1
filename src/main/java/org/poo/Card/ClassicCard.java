@@ -1,8 +1,8 @@
 package org.poo.Card;
 
-public class ClassicCard extends Card {
+public final class ClassicCard extends Card {
 
-    public ClassicCard(String associatedAccountIban) {
+    public ClassicCard(final String associatedAccountIban) {
         super(associatedAccountIban);
     }
 

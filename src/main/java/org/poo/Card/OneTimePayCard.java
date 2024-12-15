@@ -1,10 +1,8 @@
 package org.poo.Card;
 
-import org.poo.Account.Account;
+public final class OneTimePayCard extends Card {
 
-public class OneTimePayCard extends Card {
-
-    public OneTimePayCard(String associatedAccountIban) {
+    public OneTimePayCard(final String associatedAccountIban) {
         super(associatedAccountIban);
     }
     @Override

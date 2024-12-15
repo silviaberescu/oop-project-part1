@@ -1,74 +1,78 @@
 package org.poo.Account;
 import org.poo.Card.Card;
 import org.poo.utils.Utils;
-
-import java.awt.image.PackedColorModel;
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Account {
     private double balance;
     private final String currency;
-    private final String IBAN;
+    private final String iban;
     private List<Card> cards;
     private double minBalance;
     private String alias;
 
+    /**
+     * Retrieves the type of the account
+     *
+     * @return a String representing the type of the object.
+     */
     public abstract String getType();
 
-    public Account(String currency) {
-        this.IBAN = Utils.generateIBAN();
+    public Account(final String currency) {
+        this.iban = Utils.generateIBAN();
         this.currency = currency;
         this.balance = 0;
         this.cards = new ArrayList<>();
     }
 
-    public void addCard(Card card){
+    /**
+     * Adds a card to the list of cards
+     *
+     * @param card the Card object to be added.
+     */
+    public final void addCard(final Card card) {
         this.cards.add(card);
     }
 
-    public double getBalance() {
+    public final double getBalance() {
         return balance;
     }
 
-    public void setBalance(double balance) {
+    public final void setBalance(final double balance) {
         this.balance = balance;
     }
 
-    public String getAlias() {
+    public final String getAlias() {
         return alias;
     }
 
-    public void setAlias(String alias) {
+    public final void setAlias(final String alias) {
         this.alias = alias;
     }
 
-    public double getMinBalance() {
+    public final double getMinBalance() {
         return minBalance;
     }
 
-    public void setMinBalance(double minBalance) {
+    public final void setMinBalance(final double minBalance) {
         this.minBalance = minBalance;
     }
 
-    public List<Card> getCards() {
+    public final List<Card> getCards() {
         return cards;
     }
 
-    public void setCards(List<Card> cards) {
+    public final void setCards(final List<Card> cards) {
         this.cards = cards;
     }
 
-    public String getIBAN() {
-        return IBAN;
+    public final String getIBAN() {
+        return iban;
     }
 
-    public String getCurrency() {
+    public final String getCurrency() {
         return currency;
-    }
-
-    public void removeCard(Card card) {
-        this.cards.remove(card);
     }
 }
 
