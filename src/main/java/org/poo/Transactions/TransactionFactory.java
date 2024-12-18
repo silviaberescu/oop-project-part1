@@ -68,7 +68,6 @@ public class TransactionFactory {
                     data.getAmount(),
                     data.getCommerciant()
             );
-            default -> throw new IllegalArgumentException("Unsupported transaction type: " + type);
         };
     }
 }

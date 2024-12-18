@@ -32,7 +32,6 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public final class BankUtils {
-    static final double BIG_NUMBER = 100.0;
     private BankUtils() {
     }
     /**
@@ -357,6 +356,7 @@ public final class BankUtils {
         }
         return null;
     }
+
     private static Card findCard(final String cardNumber, final ArrayList<User> users) {
         for (User user: users) {
             for (Account account: user.getAccounts()) {
@@ -370,62 +370,10 @@ public final class BankUtils {
         return null;
     }
 
-//    public static ArrayList<ExchangeRate> manageExchangeRates(final ExchangeInput[]
-//                                                                      exchangesInput) {
-//        ArrayList<String> currencyList = new ArrayList<>();
-//        for (ExchangeInput exchangeInput : exchangesInput) {
-//            if (!currencyList.contains(exchangeInput.getFrom())) {
-//                currencyList.add(exchangeInput.getFrom());
-//            }
-//            if (!currencyList.contains(exchangeInput.getTo())) {
-//                currencyList.add(exchangeInput.getTo());
-//            }
-//        }
-//
-//        int n = currencyList.size();
-//
-//        double[][] rates = new double[n][n];
-//        for (int i = 0; i < n; i++) {
-//            for (int j = 0; j < n; j++) {
-//                rates[i][j] = 100000.0;
-//            }
-//            rates[i][i] = 1.0;
-//        }
-//
-//        for (ExchangeInput exchangeInput : exchangesInput) {
-//            int fromIdx = currencyList.indexOf(exchangeInput.getFrom());
-//            int toIdx = currencyList.indexOf(exchangeInput.getTo());
-//            rates[fromIdx][toIdx] = exchangeInput.getRate();
-//            rates[toIdx][fromIdx] = 1 / exchangeInput.getRate();
-//        }
-//
-//        for (int k = 0; k < n; k++) {
-//            for (int i = 0; i < n; i++) {
-//                for (int j = 0; j < n; j++) {
-//                    if (rates[i][k] < 100000.0
-//                            && rates[k][j] < 100000.0) {
-//                        rates[i][j] = Math.min(rates[i][j], rates[i][k] * rates[k][j]);
-//                    }
-//                }
-//            }
-//        }
-//
-//        ArrayList<ExchangeRate> exchanges = new ArrayList<>();
-//        for (int i = 0; i < n; i++) {
-//            for (int j = 0; j < n; j++) {
-//                if (i != j && rates[i][j] < 100000.0) {
-//                    exchanges.add(new ExchangeRate(currencyList.get(i), currencyList.get(j),
-//                            rates[i][j]));
-//                }
-//            }
-//        }
-//        return exchanges;
-//    }
     /**
      * Manages the exchange rates between currencies
      * It constructs an adjacency list representing the exchange rates between each
-     * pair of currencies and calculates the best conversion rate for each possible
-     * currency pair
+     * pair of currencies and calculates the rate for each possible currency pair
      *
      * @param exchangesInput an array of ExchangeInput objects containing the initial
      *                       exchange rates
@@ -446,30 +394,28 @@ public final class BankUtils {
                     1 / exchangeInput.getRate());
         }
 
-       // Calculating all the intermediate rates
-        for (String k : adjacencyList.keySet()) {
-            for (String i : adjacencyList.keySet()) {
-                for (String j : adjacencyList.keySet()) {
-                    adjacencyList.get(i).putIfAbsent(k, BIG_NUMBER);
-                    adjacencyList.get(k).putIfAbsent(j, BIG_NUMBER);
-                    adjacencyList.get(i).putIfAbsent(j, BIG_NUMBER);
+        for (String from : adjacencyList.keySet()) {
+            for (String to : adjacencyList.keySet()) {
+                if (!from.equals(to) && !adjacencyList.get(from).containsKey(to)) {
+                    for (String intermediate : adjacencyList.keySet()) {
+                        if (adjacencyList.get(from).containsKey(intermediate) &&
+                                adjacencyList.get(intermediate).containsKey(to)) {
+                            double newRate = adjacencyList.get(from).get(intermediate) *
+                                    adjacencyList.get(intermediate).get(to);
 
-                    double newRate = adjacencyList.get(i).get(k) * adjacencyList.get(k).get(j);
-                    if (newRate < adjacencyList.get(i).get(j)) {
-                        adjacencyList.get(i).put(j, newRate);
+                            adjacencyList.get(from).put(to, newRate);
+                            adjacencyList.get(to).put(from, 1 / newRate);
+                            break;
+                        }
                     }
                 }
             }
         }
-
-        // Build the exchanges list from the adjacency list
         ArrayList<ExchangeRate> exchanges = new ArrayList<>();
         for (String from : adjacencyList.keySet()) {
             for (Map.Entry<String, Double> entry : adjacencyList.get(from).entrySet()) {
-                String to = entry.getKey();
-                double rate = entry.getValue();
-                if (!from.equals(to) && rate < BIG_NUMBER) {
-                    exchanges.add(new ExchangeRate(from, to, rate));
+                if (!from.equals(entry.getKey())) {
+                    exchanges.add(new ExchangeRate(from, entry.getKey(), entry.getValue())); //from, to, rate
                 }
             }
         }

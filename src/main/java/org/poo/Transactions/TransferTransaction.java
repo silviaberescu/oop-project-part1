@@ -34,12 +34,9 @@ public final class TransferTransaction extends Transaction {
         node.put("senderIBAN", senderIBAN);
         node.put("receiverIBAN", receiverIBAN);
         node.put("amount", amount + " " + currency);
+        //node.put("amount", Math.round(amount * 10000.0) / 10000.0 + " " + currency);
         node.put("transferType", sent ? "sent" : "received");
         return node;
-    }
-
-    public String getSenderIBAN() {
-        return senderIBAN;
     }
 
     public boolean isSent() {
@@ -57,9 +54,4 @@ public final class TransferTransaction extends Transaction {
     public void setAmount(final int amount) {
         this.amount = amount;
     }
-
-    public String getReceiverIBAN() {
-        return receiverIBAN;
-    }
-
 }

@@ -5,7 +5,7 @@ import org.poo.utils.Utils;
 public abstract class Card {
     private final String cardNumber;
     private String status; // active, frozen, warning, inactive
-    private final String associatedIban;
+    private final String associatedIban; //links the card to a specific account
     private static final double WARNING_THRESHOLD = 30;
 
     public Card(final String associatedIban) {

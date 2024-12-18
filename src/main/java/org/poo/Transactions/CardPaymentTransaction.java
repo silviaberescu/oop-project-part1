@@ -25,6 +25,7 @@ public final class CardPaymentTransaction extends Transaction {
     public ObjectNode toJsonNode() {
         ObjectNode node = super.toJsonNode();
         node.put("amount", amount);
+        //node.put("amount", Math.round(amount * 10000.0) / 10000.0);
         node.put("commerciant", commerciant);
         return node;
     }

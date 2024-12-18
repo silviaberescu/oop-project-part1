@@ -12,7 +12,9 @@ public final class User {
     private final String email;
     private final String firstName;
     private final String lastName;
+    //A list of the user's accounts
     private final List<Account> accounts;
+    //A history of all transactions associated with the user
     private final List<Transaction> transactions;
     private final Map<String, Account> accountAliases;
 

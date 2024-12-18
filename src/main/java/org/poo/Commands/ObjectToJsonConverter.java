@@ -48,6 +48,7 @@ public final class ObjectToJsonConverter {
         ObjectNode accountNode = JsonNodeFactory.instance.objectNode();
         accountNode.put("IBAN", account.getIBAN());
         accountNode.put("balance", account.getBalance());
+        //accountNode.put("balance", Math.round(account.getBalance() * 10000.0) / 10000.0);
         accountNode.put("currency", account.getCurrency());
         accountNode.put("type", account.getType());
         ArrayNode cardArray = JsonNodeFactory.instance.arrayNode();

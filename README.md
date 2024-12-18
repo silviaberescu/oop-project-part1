@@ -1,45 +1,43 @@
-# Project Assignment POO  - J. POO Morgan - Phase One
+# Project Phase One
 
-![](https://s.yimg.com/ny/api/res/1.2/aN0SfZTtLF5hLNO0wIN3gg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTcwNTtoPTQyNztjZj13ZWJw/https://o.aolcdn.com/hss/storage/midas/b23d8b7f62a50a7b79152996890aa052/204855412/fit.gif)
+# Silvia-Maria Berescu 322CD
 
-#### Assignment Link: [https://ocw.cs.pub.ro/courses/poo-ca-cd/teme/2024/proiect-e1](https://ocw.cs.pub.ro/courses/poo-ca-cd/teme/2024/proiect-e1)
+The project implements the Singleton pattern for the Bank class, ensuring that only one
+instance of the bank exists throughout the whole test. The system receives commands and 
+uses handlers to process them and generates output or transactions for each command. 
+BankUtils and CommandUtils classes are used to manipulate the commands.
+- The Bank class saves the list of users and exchange rates.
+- BankUtils contains utility methods for managing exchange rates, users, and handling 
+commands. Commands are parsed and handled in transactionFlow(). The BankUtils class 
+interprets the input, determines the appropriate Command subclass, and calls the execute
+method to perform the action. This design ensures a clean separation of concerns.
+- The ExchangeRate class encapsulates information about currency exchange rates, 
+holding the conversion ratio between two different currencies.
+- Command is an abstract base class for all commands. Each one implements the execute()
+method by calling methods from the CommandUtils to perform specific actions, using, 
+this way, the Command Pattern. 
+- The CommandUtils class provides reusable methods to perform operations required by 
+commands and holds the main logic for all commands. These methods ensure the command 
+classes remain concise.
+- The User class manages user-specific data such as accounts, transactions, and account 
+aliases.
+- The TransactionFactory class uses a Factory Pattern to create instances of specific 
+transaction types based on the provided TransactionType enum. 
+- The TransactionData class is used to encapsulate all input data that may be needed to 
+create a transaction.
+- Transaction is the base class for all transactions. Subclasses of Transaction represent 
+specific transaction types, each having specific fields. Each transaction type provides 
+a toJsonNode method that converts its details into a JSON format.
+- The Card class is an abstract base class that provides the attributes and methods for 
+managing cards. Each subclass of Card customizes how the payment works through the 
+makePayment method. 
+- ClassicCard represents a standard card. 
+- OneTimePayCard represents a card designed for single-use payments, that becomes inactive 
+after usage using the makePayment.
+- The Account class serves as the foundation for the account types. It defines shared 
+properties while requiring subclasses to specify their types through an abstract method.
+- ClassicAccount represents a standard bank account.
+- SavingsAccount represents a specialized account that earns interest over time.
 
-## Skel Structure
-
-* src/
-    * checker/ - checker files
-    * fileio/ - contains classes used to read data from the json files
-    * main/
-        * Main - the Main class runs the checker on your implementation. Add the entry point to your implementation in it. Run Main to test your implementation from the IDE or from command line.
-        * Test - run the main method from Test class with the name of the input file from the command line and the result will be written
-          to the out.txt file. Thus, you can compare this result with ref.
-* input/ - contains the tests in JSON format
-* ref/ - contains all reference output for the tests in JSON format
-
-## Tests
-
-Tests Basic 1 - 8: Infrastructure \
-Tests Functional 9 - 17: Advanced \
-Tests Flow 18 - 20: Large Input
-
-1. test01_create - 2p
-2. test02_delete - 2p
-3. test03_one_time_card - 2p
-4. test04_funds - 2p
-5. test05_money_flow - 2p
-6. test06_non_existing - 2p
-7. test07_send_money_part1 - 3p
-8. test08_send_money_part2 - 3p
-9. test09_print_transactions - 3p
-10. test10_errors - 3p
-11. test11_card_status - 5p
-12. test12_continuous_payments - 5p
-13. test13_savings_account - 5p
-14. test14_split_payments - 5p
-15. test15_every_payment - 5p
-16. test16_report - 5p
-17. test17_spendings_report - 5p
-18. test18_large_input_1 - 7p
-19. test19_large_input_2 - 7p
-20. test19_large_input_3 - 7p
-
+Exception handling is implemented to ensure the system handles unpredicted behaviour 
+such as invalid inputs, insufficient balances, providing appropriate error messages.
