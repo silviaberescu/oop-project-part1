@@ -1,6 +1,6 @@
 # Project Phase One
 
-# Silvia-Maria Berescu 322CD
+# Silvia-Maria Berescu
 
 The project implements the Singleton pattern for the Bank class, ensuring that only one
 instance of the bank exists throughout the whole test. The system receives commands and 
